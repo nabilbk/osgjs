@@ -24,8 +24,7 @@ var Polytope = function () {
     this._maskStack.push( this._resultMask );
 };
 
-Polytope.prototype = MACROUTILS.objectInherit( Object.prototype, {
-
+MACROUTILS.createPrototypeObject( Polytope, MACROUTILS.objectInherit( Object.prototype, {
 
     getPlanes: function () {
         return this._planeList;
@@ -342,7 +341,7 @@ Polytope.prototype = MACROUTILS.objectInherit( Object.prototype, {
 
 
 
-} );
+} ), 'osg', 'Polytope' );
 
 /*jshint bitwise: true */
 

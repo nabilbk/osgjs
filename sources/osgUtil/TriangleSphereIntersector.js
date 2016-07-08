@@ -20,7 +20,7 @@ var TriangleSphereIntersector = function () {
     TriangleLineSegmentIntersector.apply( this );
 };
 
-TriangleSphereIntersector.prototype = MACROUTILS.objectInherit( TriangleLineSegmentIntersector.prototype, {
+MACROUTILS.createPrototypeObject( TriangleSphereIntersector, MACROUTILS.objectInherit( TriangleLineSegmentIntersector.prototype, {
     set: function ( center, radius ) {
         this._center = center;
         this._radius = radius;
@@ -237,6 +237,6 @@ TriangleSphereIntersector.prototype = MACROUTILS.objectInherit( TriangleLineSegm
             this.hit = true;
         };
     } )()
-} );
+} ), 'osgUtil', 'TriangleSphereIntersector' );
 
 module.exports = TriangleSphereIntersector;

@@ -9,7 +9,7 @@ var KdTreeSphereIntersector = function () {
     this._intersector = new TriangleSphereIntersector();
 };
 
-KdTreeSphereIntersector.prototype = MACROUTILS.objectInherit( KdTreeLineSegmentIntersector.prototype, {
+MACROUTILS.createPrototypeObject( KdTreeSphereIntersector, MACROUTILS.objectInherit( KdTreeLineSegmentIntersector.prototype, {
 
     init: function ( intersections, center, radius, nodePath ) {
 
@@ -84,6 +84,6 @@ KdTreeSphereIntersector.prototype = MACROUTILS.objectInherit( KdTreeLineSegmentI
             return vec3.sqrDist( bb.center( tmp ), this._center ) <= r * r;
         };
     } )()
-} );
+} ), 'osg', 'KdTreeSphereIntersector' );
 
 module.exports = KdTreeSphereIntersector;
