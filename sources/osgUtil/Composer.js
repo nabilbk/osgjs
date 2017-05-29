@@ -484,11 +484,19 @@ Composer.Filter.Custom.prototype = MACROUTILS.objectInherit( Composer.Filter.pro
 
         }
     },
-    build: function () {
-
+    getProgram: function () {
+        return this._program;
+    },
+    setProgram: function ( program ) {
+        this._program = program;
+    },
+    buildProgram: function () {
         this._program = new Program(
             new Shader( Shader.VERTEX_SHADER, this._vertexShader + this.getDefineVertexName() ),
             new Shader( Shader.FRAGMENT_SHADER, this._fragmentShader + this.getDefineFragmentName() ) );
+    },
+    build: function () {
+        if ( !this._program ) this.buildProgram();
 
         if ( this._uniforms ) {
             this.autoBindFragmentUniformStateSet( this._stateSet, this._fragmentShader, this._uniforms );
