@@ -6,8 +6,10 @@ var mat4 = require( 'osg/glMatrix' ).mat4;
 var Texture = require( 'osg/Texture' );
 var TransformEnums = require( 'osg/transformEnums' );
 var vec4 = require( 'osg/glMatrix' ).vec4;
+var Scissor = require( 'osg/Scissor' );
+var StateAttribute = require( 'osg/StateAttribute' );
 
-
+//var defaultScissor = new Scissor();
 /**
  * Camera - is a subclass of Transform which represents encapsulates the settings of a Camera.
  * @class Camera
@@ -34,6 +36,9 @@ var Camera = function () {
     this._view = undefined;
     this._renderer = undefined;
     this._attachments = {};
+
+    //    this.getOrCreateStateSet().setAttributeAndModes( defaultScissor, StateAttribute.ON );
+
 };
 
 Camera.PRE_RENDER = 0;
@@ -94,7 +99,6 @@ Camera.prototype = MACROUTILS.objectLibraryClass( MACROUTILS.objectInherit(
             return this._initialDrawCallback;
 
         },
-
 
         getAttachments: function () {
             return this._attachments;
@@ -169,7 +173,12 @@ Camera.prototype = MACROUTILS.objectLibraryClass( MACROUTILS.objectInherit(
             this.renderOrder = order;
             this.renderOrderNum = orderNum;
         },
-
+        getFrameBufferObject: function () {
+            return this.frameBufferObject;
+        },
+        setFrameBufferObject: function ( fbo ) {
+            this.frameBufferObject = fbo;
+        },
         detachAll: function () {
             this._attachments = {};
 
