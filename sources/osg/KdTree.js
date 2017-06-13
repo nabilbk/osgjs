@@ -210,7 +210,7 @@ BuildKdTree.prototype = {
         options._numVerticesProcessed += nbVertices;
 
         // Here we can init the typed arrays
-        var estimatedSize = vertices.length * 2;
+        var estimatedSize = ( vertices.length / 3 ) * 2;
         this._primitiveIndices = new Uint32Array( estimatedSize );
         this._centers = new Float32Array( estimatedSize * 3 );
 
@@ -543,6 +543,7 @@ KdTree.prototype = MACROUTILS.objectLibraryClass( {
             var vertexIndices = this._vertexIndices;
             for ( var i = istart; i < iend; ++i ) {
                 var primitiveIndex = this._primitiveIndices[ i ];
+                primitiveIndex++;
                 functor.intersectTriangle( vertices, i, vertexIndices[ primitiveIndex ], vertexIndices[ primitiveIndex + 1 ], vertexIndices[ primitiveIndex + 2 ] );
             }
         } else {
